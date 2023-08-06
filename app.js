@@ -19,21 +19,21 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: false,
 };
-if (process.env.NODE_ENV !== "development") {
-    sessionOptions.proxy = true;
-    sessionOptions.cookie = {
-        sameSite: "none",
-        secure: true,
-    };
+    if (process.env.NODE_ENV !== "development") {
+        sessionOptions.proxy = true;
+        sessionOptions.cookie = {
+            sameSite: "none",
+            secure: true,
+        };
 }
 app.use(
     session(sessionOptions)
 );
 
 app.use(express.json());
-TuitsController(app);
-// HelloController(app)
-UserController(app)
 AuthController(app)
+TuitsController(app);
+//HelloController(app)
+UserController(app)
 // app.listen(4000)
 app.listen(process.env.PORT || 4000);
